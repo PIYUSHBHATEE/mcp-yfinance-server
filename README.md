@@ -78,7 +78,8 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 Once your [pyproject.toml](https://github.com/Adity-star/mcp-yfinance-server/blob/main/pyproject.toml) is set up with dependencies, run: 
 ```bash
 #  Run 
-uv install .
+uv pip install -e .
+
 ```
 
 ---
@@ -267,3 +268,4 @@ If this project saved you from API rate limits or overpriced SaaS tools...
 🚀 Let’s build better tools together.
 
 If you’d like a tweet thread, carousel, or launch post for this — I’ve got your back 😎
+
