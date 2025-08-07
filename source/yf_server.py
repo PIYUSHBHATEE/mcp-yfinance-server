@@ -1,5 +1,5 @@
 import yfinance as yf
-from .technical_indicators import TechnicalIndicators
+from source.technical_indicators import TechnicalIndicators
 from mcp.server.fastmcp import FastMCP
 import threading
 import time
@@ -633,3 +633,7 @@ def analyze_stock(ticker):
 # --- Start the background price update thread ---
 price_update_thread = threading.Thread(target=update_prices, daemon=True)
 price_update_thread.start()
+
+
+if __name__ == "__main__":
+    mcp.run()
