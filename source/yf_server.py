@@ -1,5 +1,5 @@
 import yfinance as yf
-from technical_indicators import TechnicalIndicators
+from .technical_indicators import TechnicalIndicators
 from mcp.server.fastmcp import FastMCP
 import threading
 import time
@@ -238,7 +238,7 @@ def get_support_resistance(symbol: str, period: str = "1y", interval: str = "1d"
         return {"error": str(e)}
 
 @mcp.tool()
-def get_trend_analysis(symbol: str, period: str = "1y", interval: str = "1d") -> Dict[str, any]:
+def get_trend_analysis(symbol: str, period: str = "1y", interval: str = "1d") -> Dict[str, Union[str, List, float]]:
     """
     Complete trend analysis for a stock.
     
@@ -318,7 +318,7 @@ def get_trend_analysis(symbol: str, period: str = "1y", interval: str = "1d") ->
         return {"error": str(e)}
 
 @mcp.tool()
-def get_technical_summary(symbol: str) -> Dict[str, any]:
+def get_technical_summary(symbol: str) -> Dict[str, Union[str, List, float]]:
     """
     Generate a complete technical analysis summary for a stock.
     
@@ -633,7 +633,3 @@ def analyze_stock(ticker):
 # --- Start the background price update thread ---
 price_update_thread = threading.Thread(target=update_prices, daemon=True)
 price_update_thread.start()
-
-# Run the server
-if __name__ == "__main__":
-    mcp.run()
