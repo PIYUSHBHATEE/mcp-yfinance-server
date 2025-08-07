@@ -1,8 +1,9 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/adity-star-mcp-yfinance-server-badge.png)](https://mseep.ai/app/adity-star-mcp-yfinance-server)
+
 # 💹 MCP YFinance Stock Server
 ![Python](https://img.shields.io/badge/python-3.10-blue)
 ![MCP](https://img.shields.io/badge/MCP-Compatible-green)
 ![License](https://img.shields.io/github/license/Adity-star/mcp-yfinance-server)
-
 
 
 This project sets up a **stock Price server** powered by the **Yahoo Finance (YFinance)** API and built for seamless integration with **MCP (Multi-Agent Control Protocol)**.
@@ -77,7 +78,8 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 Once your [pyproject.toml](https://github.com/Adity-star/mcp-yfinance-server/blob/main/pyproject.toml) is set up with dependencies, run: 
 ```bash
 #  Run 
-uv install .
+uv pip install -e .
+
 ```
 
 ---
@@ -104,7 +106,9 @@ Explore the source code here:
 
 # 🛠️ MCP Tool Reference
 
-The server exposes the following tools for AI agents and CLI users:
+The server exposes many tools for AI agents and CLI users.  
+Here are some important tools, check out the complete tools list [here](https://github.com/Adity-star/mcp-yfinance-server/blob/main/results/tools.md):
+
 
 ## 📦 Tool List
 
@@ -120,7 +124,7 @@ The server exposes the following tools for AI agents and CLI users:
 | `compare_stocks`              | Compare two stock prices (useful for relative performance analysis).       |
 
 
-> ✅ Total: 18 powerful tools to analyze and monitor stocks with precision.
+> ✅ [Total: 18 powerful tools to analyze and monitor stocks with precision.](https://github.com/Adity-star/mcp-yfinance-server/blob/main/results/tools.md)
 
 ## 🧠 Use Cases
 
@@ -264,3 +268,4 @@ If this project saved you from API rate limits or overpriced SaaS tools...
 🚀 Let’s build better tools together.
 
 If you’d like a tweet thread, carousel, or launch post for this — I’ve got your back 😎
+
