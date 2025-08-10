@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/github/license/Adity-star/mcp-yfinance-server)
 
 
-This project sets up a **stock Price server** powered by the **Yahoo Finance (YFinance)** API and built for seamless integration with **MCP (Multi-Agent Control Protocol)**.
+This project sets up a **stock Price server** powered by the **Yahoo Finance (YFinance)** API and built for seamless integration with **MCP (Model Control Protocol)**.
 
 It allows AI agents or clients to:
 - Retrieve real-time stock data
