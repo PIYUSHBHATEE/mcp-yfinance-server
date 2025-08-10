@@ -86,13 +86,12 @@ uv pip install -e .
 ## 🚀 Step 2: Running the MCP Server
 Once your environment is ready, start the stock server:
 ```bash
-cp ../yf_serve.py .
-uv run source/yf_server.py
+uv run main.py
 ```
 🧪 Want a quick test first?
-Try running the lightweight demo server:
+Try checking the tools first:
 ```bash
-uv run demo_stock_price_server.py
+python run test_server_fun.py
 ```
 
 📄 Curious how the full server works?
@@ -165,12 +164,12 @@ To integrate your YFinance MCP server, add the following entry to your mcp.confi
 {
   "mcpServers": {
     "yfinance-price-tracker": {
-      "command": "/ABSOLUTE/PATH/TO/uv",
+      "command": "uv",
       "args": [
         "--directory",
         "/ABSOLUTE/PATH/TO/YOUR/mcp-yfinance-server",
         "run",
-        "yf_server.py"
+        "main.py"
       ]
     }
   }
@@ -268,4 +267,5 @@ If this project saved you from API rate limits or overpriced SaaS tools...
 🚀 Let’s build better tools together.
 
 If you’d like a tweet thread, carousel, or launch post for this — I’ve got your back 😎
+
 
