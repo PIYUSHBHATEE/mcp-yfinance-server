@@ -1,7 +1,7 @@
 [project]
 name = "mcp-yfinance-server"
 version = "0.1.0"
-description = "A Yfinance Server project"
+description = "A Yfinance MCP Server providing comprehensive financial data and analysis"
 readme = "README.md"
 requires-python = ">=3.11"
 
@@ -16,6 +16,9 @@ dependencies = [
     "matplotlib>=3.10.1",
     "ipython>=9.1.0",
     "fastmcp>=2.11.1",
+    "fastapi",
+    "uvicorn",
+    "plotly>=6.2.0",
 ]
 
 [[project.authors]]
@@ -27,9 +30,11 @@ requires = ["setuptools>=73.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["mcp-yfinance-server"]
+packages = ["yfinance_mcp"]
+
+[project.scripts]
+mcp-yfinance-server = "yfinance_mcp.server:main"
 
 [tool.setuptools.package-dir]
-"mcp-yfinance-server" = "source"
-
+"yfinance_mcp" = "yfinance_mcp"
 

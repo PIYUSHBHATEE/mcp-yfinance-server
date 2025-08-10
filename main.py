@@ -1,11 +1,16 @@
-from source.yf_server import mcp
+#!/usr/bin/env python3
+"""
+MCP Server Runner - For testing and development
+This file provides a simple way to run the yfinance MCP server
+"""
 
+import sys
+import os
 
-# This defines the ASGI app expected by uvicorn
-app = mcp.streamable_http_app()  
+# Add the current directory to Python path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+from yfinance_mcp.server import main
 
-# If also running standalone via python main.py
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+if __name__ == "__main__":    
+    main()

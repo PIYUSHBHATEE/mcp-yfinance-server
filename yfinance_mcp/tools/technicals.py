@@ -1,7 +1,6 @@
-from mcp.server.fastmcp import FastMCP
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Union, Optional, Tuple
+from typing import Dict, List
 import yfinance as yf
 
 class TechnicalIndicators:
@@ -84,8 +83,9 @@ class TechnicalIndicators:
         
         for i in range(window, len(delta)):
             if i > window:  
-                avg_gain[i] = (avg_gain[i-1] * (window-1) + gain[i]) / window
-                avg_loss[i] = (avg_loss[i-1] * (window-1) + loss[i]) / window
+                avg_gain.iloc[i] = (avg_gain.iloc[i-1] * (window-1) + gain.iloc[i]) / window
+                avg_loss.iloc[i] = (avg_loss.iloc[i-1] * (window-1) + loss.iloc[i]) / window
+
         
         rs = avg_gain / avg_loss
         rsi = 100 - (100 / (1 + rs))
@@ -205,44 +205,43 @@ class TechnicalIndicators:
                 
         return volatility
     
+    
     @staticmethod
-    def detect_support_resistance(data: pd.DataFrame, window: int = 20, 
-                               sensitivity: float = 0.03) -> Dict[str, List[float]]:
+    def detect_support_resistance(data: pd.DataFrame, window: int = 20, sensitivity: float = 0.03) -> Dict[str, List[float]]:
         """
         Detect support and resistance levels using local minima and maxima.
-        
-        Args:
-            data: DataFrame with price data
-            window: Lookback period for finding pivots (default: 20)
-            sensitivity: Minimum price change percentage to consider (default: 0.03)
-            
-        Returns:
-            Dictionary with 'support' and 'resistance' levels
         """
-        high = data['High']
-        low = data['Low']
-        
-        resistance_levels = []
-        support_levels = []
-        
-        # Find pivot highs (local maxima)
-        for i in range(window, len(high) - window):
-            if all(high[i] > high[i-j] for j in range(1, window+1)) and all(high[i] > high[i+j] for j in range(1, window+1)):
-                # Check if significantly different from previously found resistance levels
-                if not any(abs(high[i] - level) / level < sensitivity for level in resistance_levels):
-                    resistance_levels.append(high[i])
-                    
-        # Find pivot lows (local minima)
-        for i in range(window, len(low) - window):
-            if all(low[i] < low[i-j] for j in range(1, window+1)) and all(low[i] < low[i+j] for j in range(1, window+1)):
-                # Check if significantly different from previously found support levels
-                if not any(abs(low[i] - level) / level < sensitivity for level in support_levels):
-                    support_levels.append(low[i])
-                    
-        return {
-            'support': sorted(support_levels),
-            'resistance': sorted(resistance_levels)
-        }
+        try:
+            if data is None or data.empty or len(data) < (2 * window + 1):
+                return {'support': [], 'resistance': []}
+
+            high = data['High']
+            low = data['Low']
+
+            resistance_levels = []
+            support_levels = []
+
+            for i in range(window, len(high) - window):
+                if all(high[i] > high[i - j] for j in range(1, window + 1)) and \
+                all(high[i] > high[i + j] for j in range(1, window + 1)):
+                    if not any(abs(high[i] - level) / level < sensitivity for level in resistance_levels):
+                        resistance_levels.append(high[i])
+
+            for i in range(window, len(low) - window):
+                if all(low[i] < low[i - j] for j in range(1, window + 1)) and \
+                all(low[i] < low[i + j] for j in range(1, window + 1)):
+                    if not any(abs(low[i] - level) / level < sensitivity for level in support_levels):
+                        support_levels.append(low[i])
+
+            return {
+                'support': sorted(support_levels),
+                'resistance': sorted(resistance_levels)
+            }
+
+        except Exception as e:
+            print(f"[ERROR] detect_support_resistance: {e}")
+            return {'support': [], 'resistance': []}
+
     
     @staticmethod
     def detect_trends(data: pd.DataFrame, short_window: int = 20, long_window: int = 50, 
