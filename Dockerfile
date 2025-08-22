@@ -5,15 +5,11 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Copy dependency files
-COPY pyproject.toml uv.lock /app/
-
-# Install uv for dependency management and install dependencies
-RUN pip install --no-cache-dir uv && \
-    uv sync --frozen
-
-# Copy the rest of the application code
+# Copy all source code first
 COPY . /app/
+
+# Install dependencies using pip
+RUN pip install --no-cache-dir -e .
 
 # Expose port 8000 for the MCP server
 EXPOSE 8000
